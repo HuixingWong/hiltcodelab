@@ -18,10 +18,38 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         tv.setOnClickListener {
             lifecycleScope.launch {
-                val data = viewModel.getData()
-                tv.text = data
+                viewModel.fetchData()
             }
         }
+        viewModel.data.observe(this, {
+
+        })
+
+        viewModel.enbale.observe(this, {
+
+        })
+
+        viewModel.b.observe(this, {
+
+        })
+
+
+        viewModel.Viewstate.observe(this, {
+
+
+
+        })
 
     }
+
+    sealed class UploadViewState {
+        object Initial : UploadViewState()
+
+        data class UploadInProgress(val percentage: Int) : UploadViewState()
+
+        object UploadFailed : UploadViewState()
+
+        object UploadSuccess : UploadViewState()
+    }
+
 }
